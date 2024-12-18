@@ -612,11 +612,12 @@ const Chatbot = ({ t }) => {
 
         console.log('準備發送的資料:', body);
 
-        fetch(`http://10.10.10.115:9999/upload_fnm`, {
+        fetch(`http://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/maximo/oslc/script/ZZ_CAR_GENFNM`, {
             method: "POST",
-            body: JSON.stringify({ 'msg': body }),
+            body: JSON.stringify( body ),
             headers: {
                 "Content-Type": "application/json",
+                "maxauth": process.env.REACT_APP_MAXIMO_KEY
             },
             mode: 'cors',
             credentials: 'include',
