@@ -249,7 +249,7 @@ const Chatbot = ({ t }) => {
         } else if (tmp !== '' && !formMode) {
             setLoading(true);
 
-            // 先��定使用者的意圖，如果是回報工單則呼叫其他的模組
+            // 先定使用者的意圖，如果是回報工單則呼叫其他的模組
             fetch(`http://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/intent`, {
                 method: "POST",
                 body: JSON.stringify({ 'msg': tmp }),
@@ -614,7 +614,7 @@ const Chatbot = ({ t }) => {
 
         fetch(`http://${process.env.REACT_APP_API_HOST}:${process.env.REACT_APP_API_PORT}/maximo/oslc/script/ZZ_CAR_GENFNM`, {
             method: "POST",
-            body: JSON.stringify( body ),
+            body: JSON.stringify(body),
             headers: {
                 "Content-Type": "application/json",
                 "maxauth": process.env.REACT_APP_MAXIMO_KEY
@@ -628,17 +628,48 @@ const Chatbot = ({ t }) => {
         })
         .then(data => {
             console.log('處理回應數據:', data);
-            setIsUploading(false); // 結束上傳狀態
+            setIsUploading(false);
             if (data['success']) {
                 const _tmp = `已成功立案故障通報${uploadInfo.current['carno']}，<a href="${data['srurl']}" target="_blank" rel="noopener noreferrer">點此查看</a>，是否要再次回報？`;
                 setMessage([...message.slice(0, -1), [_tmp, tmp, 'RESUBMITMODE']]);
+                
+                // 發送 Line Notify
+                const notifyMessage = `
+故障通報通知
+==========
+車號：${uploadInfo.current['carno']}
+車次：${uploadInfo.current['trainsno']}
+位置：${trainCurrenStation.current}站
+故障內容：${uploadInfo.current['desc']}
+故障時間：${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:${new Date().getMinutes()}
+聯絡資訊：${uploadInfo.current['phone']}
+==========`;
+                
+                const formData = new URLSearchParams();
+                formData.append('message', notifyMessage);
+
+                fetch('https://notify-api.line.me/api/notify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': 'Bearer GafTxlFk9RjEJ4cm6a5DjqMXR35PuSAwRTrsLsw5Ted'
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Line Notify 發送結果:', result);
+                })
+                .catch(error => {
+                    console.error('Line Notify 發送失敗:', error);
+                });
             } else {
                 setMessage([...message.slice(0, -1), [data['error'], tmp, '']]);
             }
         })
         .catch(err => {
-            console.error('發生誤:', err);
-            setIsUploading(false); // 結束上傳狀態
+            console.error('發生錯誤:', err);
+            setIsUploading(false);
             setMessage([...message.slice(0, -1), ['上傳過程發生錯誤: ' + err.message, tmp, '']]);
         });
     };
