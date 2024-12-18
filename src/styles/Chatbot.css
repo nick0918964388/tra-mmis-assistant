@@ -1,0 +1,187 @@
+/* 主要聊天容器樣式 */
+.chat-container {
+  max-width: 48rem;
+  width: 100%;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+
+/* 標題樣式 */
+.chat-title {
+  background: #003C9D; /* 台鐵藍 */
+  color: white;
+  padding: 1rem 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 48rem;
+  margin: 0 auto 1rem auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 60, 157, 0.2);
+}
+
+.chat-title i {
+  font-size: 1.5rem;
+}
+
+/* 添加 home 圖示的互動效果 */
+.chat-title i.pi-home {
+  transition: transform 0.2s ease;
+}
+
+.chat-title i.pi-home:hover {
+  transform: scale(1.1);
+}
+
+/* 聊天訊息區域 */
+#content {
+  padding: 1rem;
+  height: calc(100vh - 300px);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* 訊息氣泡共用樣式 */
+.message-bubble {
+  max-width: 80%;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  margin: 1rem 0;
+}
+
+/* AI 訊息樣式 */
+.ai-message {
+  background: #F0F7FF; /* 淺藍背景 */
+  border: 1px solid #D0E3FF;
+}
+
+/* 使用者訊息樣式 */
+.human-message {
+  background: #003C9D; /* 台鐵藍 */
+  color: white;
+  margin-left: auto;
+}
+
+/* 輸入區域樣式 */
+.input-container {
+  border-top: 1px solid #e5e5e5;
+  padding: 1rem;
+  background: #ffffff;
+  position: sticky;
+  bottom: 0;
+}
+
+.p-inputgroup {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.p-inputgroup:focus-within {
+  border-color: #003C9D;
+}
+
+.p-inputtext {
+  border: none !important;
+  padding: 0.75rem 1rem !important;
+}
+
+/* 按鈕樣式 */
+#button-1 {
+  background-color: #003C9D; /* 台鐵藍 */
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 60, 157, 0.2);
+}
+
+#button-1:hover {
+  background-color: #002D75; /* 深藍 */
+}
+
+/* 載入動畫 */
+.loading-dots {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #003C9D; /* 台鐵藍 */
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* 選單容器樣式 */
+.menu-container {
+  position: relative;
+}
+
+/* 選單圖示樣式 */
+.chat-title i.pi-bars {
+  transition: transform 0.2s ease;
+  font-size: 1.5rem;
+}
+
+.chat-title i.pi-bars:hover {
+  transform: scale(1.1);
+}
+
+/* 選單覆蓋層樣式 */
+.menu-overlay {
+  z-index: 1000;
+}
+
+/* 自定義選單樣式 */
+.p-menu {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.p-menu .p-menuitem-link {
+  padding: 0.75rem 1rem;
+  color: #333;
+  transition: background-color 0.2s;
+}
+
+.p-menu .p-menuitem-link:hover {
+  background-color: #F0F7FF;
+}
+
+.p-menu .p-menuitem-icon {
+  color: #003C9D;
+  margin-right: 0.5rem;
+}
+
+/* 禁用項目的樣式 */
+.p-menu .p-menuitem-link.p-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+  

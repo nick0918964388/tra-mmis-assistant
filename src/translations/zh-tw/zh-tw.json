@@ -1,0 +1,29 @@
+{
+    "root": "",
+    "chatbot": {
+        "report_type_f": "故障通報",
+        "report_step_1": "請輸入列車發生故障車次",
+        "report_step_2": "請輸入列車發生故障車號",
+        "report_step_3": "請輸入列車發生故障內容",
+        "report_step_4": "請輸入司機員聯絡電話",
+        "confirm_location": "系統判斷目前車輛位置在{station}站，是否正確？",
+        "input_location": "請輸入正確的車站位置",
+        "confirm_upload": "請確認以下資訊是否正確：",
+        "train_no": "車次",
+        "car_no": "車號",
+        "failure_desc": "故障內容",
+        "driver_phone": "司機員電話",
+        "location": "故障位置",
+        "modify": "修改",
+        "confirm_all": "確認無誤，送出通報",
+        "modify_field": {
+            "trainsno": "請輸入正確的車次：",
+            "carno": "請輸入正確的車號：",
+            "desc": "請輸入正確的故障內容：",
+            "phone": "請輸入正確的司機員電話：",
+            "location": "請輸入正確的車站位置："
+        }
+    },
+    "yes":"是",
+    "no":"否"
+}
